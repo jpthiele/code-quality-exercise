@@ -1,0 +1,34 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: check-added-large-files
+    args: [--maxkb=8192]
+  - id: check-merge-conflict
+  # Check YAML files for correct syntax
+  - id: check-yaml
+    args: [--allow-multiple-documents]
+  # Exactly one empty line at the end of text files.
+  - id: end-of-file-fixer
+# Useful in general but not for our exercise
+#  - id: no-commit-to-branch
+#    args: [--branch,main]
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.23.2
+  hooks:
+  # Check for hard coded secrets like passwords
+  - id: gitleaks
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.9.4
+  hooks:
+    # Run the linter.
+    - id: ruff
+    # Run the formatter.
+    - id: ruff-format
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.4.0
+  hooks:
+  - id: codespell
+    # For the sake of this exercise we want to keep the unfixed file
+    args: ["--skip=*.bak"]
